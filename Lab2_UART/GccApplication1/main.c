@@ -5,36 +5,48 @@
  * Author : GGPC
  */ 
 
+#define F_CPU 2000000UL
 #include <avr/io.h>
-#include <stdbool.h>
+#include <util/delay.h.>
 #include <stdint.h>
 
-bool check_prime(uint16_t chk_no); // Function prototype
-
-int main(void)
-{
-	uint16_t prime_array[62];
-	uint8_t prime_count = 0;
+void usart_init(uint16_t ubrr) {
 	
-	// Generate all prime numbers up to 300
-	for(uint16_t num = 2; num <= 300; num++) {
-		if(check_prime(num)) {
-			prime_array[prime_count] = num;
-			prime_count++;
-		}
-	}
-	
-    while (1) 
-    {
-    }
+	UCSR0A = 0b00000000;
+	UCSR0B = 0b00001000;
+	UCSR0C = 0b00000110; 
+	UBRR0 = ubrr;
 }
 
-bool check_prime(uint16_t chk_no) {
-	for (uint16_t cnt1=2; cnt1 < chk_no; cnt1++) {
-	if ((chk_no % cnt1) == 0){
-		return false; 
-	}
-	}
-	return true; 
+void usart_transmit(char character) {
+	while ((UCSR0A & 0b00100000) == 0) {
+;
+}
+UDR0 = character; 
+}
+
+
+int main(void)  
+{
+	usart_init(12);
+   
+    while (1) 
+    {
+		uint16_t number = 345;
+		
+		uint8_t digit1 = number % 10;
+		number = number / 10;
+		
+		uint8_t digit2 = number % 10;
+		number = number / 10;
+		
+		uint8_t digit3 = number % 10;
+
+		usart_transmit(digit3 + 48);
+		usart_transmit(digit2 + 48);
+		usart_transmit(digit1 + 48);
+
+		_delay_ms(500);
+     }
 }
 
