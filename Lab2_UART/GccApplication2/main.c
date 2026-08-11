@@ -9,6 +9,7 @@
 #include <stdint.h>
 #include <stdbool.h>
 #include "uart.h"
+#include <util/delay.h>
 
 bool check_prime(uint16_t chk_no) {
 	for (uint16_t cnt1=2; cnt1 < chk_no; cnt1++) {
@@ -43,6 +44,8 @@ int main(void)
 			usart_transmit_number(prime_array[i]);
 			usart_transmit(',');
 			usart_transmit(' ');
+			
+			_delay_ms(500);
 		}
 	}
 }
