@@ -5,7 +5,7 @@ c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/..
 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
                               C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.7.374/gcc/dev/atmega328p/avr5/crtatmega328p.o (exit)
 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_umulhisi3.o)
-                              main.o (__umulhisi3)
+                              uart.o (__umulhisi3)
 
 Discarded input sections
 
@@ -14,6 +14,9 @@ Discarded input sections
  .text          0x00000000        0x0 main.o
  .data          0x00000000        0x0 main.o
  .bss           0x00000000        0x0 main.o
+ .text          0x00000000        0x0 uart.o
+ .data          0x00000000        0x0 uart.o
+ .bss           0x00000000        0x0 uart.o
  .text          0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_udivmodhi4.o)
  .data          0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_udivmodhi4.o)
  .bss           0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_udivmodhi4.o)
@@ -76,6 +79,7 @@ Linker script and memory map
 Address of section .data set to 0x800100
 LOAD C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.7.374/gcc/dev/atmega328p/avr5/crtatmega328p.o
 LOAD main.o
+LOAD uart.o
 START GROUP
 LOAD c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a
 END GROUP
@@ -268,20 +272,20 @@ END GROUP
                 0x0000007c                __vector_20
                 0x00000080                . = ALIGN (0x2)
  *(.text.*)
- .text.usart_init
-                0x00000080       0x44 main.o
-                0x00000080                usart_init
- .text.usart_transmit
-                0x000000c4       0x36 main.o
-                0x000000c4                usart_transmit
- .text.usart_transmit_number
-                0x000000fa      0x11a main.o
-                0x000000fa                usart_transmit_number
  .text.check_prime
-                0x00000214       0x58 main.o
-                0x00000214                check_prime
- .text.main     0x0000026c       0xb0 main.o
-                0x0000026c                main
+                0x00000080       0x58 main.o
+                0x00000080                check_prime
+ .text.main     0x000000d8       0xb0 main.o
+                0x000000d8                main
+ .text.usart_init
+                0x00000188       0x44 uart.o
+                0x00000188                usart_init
+ .text.usart_transmit
+                0x000001cc       0x36 uart.o
+                0x000001cc                usart_transmit
+ .text.usart_transmit_number
+                0x00000202      0x11a uart.o
+                0x00000202                usart_transmit_number
  .text.libgcc.div
                 0x0000031c       0x28 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_udivmodhi4.o)
                 0x0000031c                __udivmodhi4
@@ -384,6 +388,7 @@ END GROUP
  *(.comment)
  .comment       0x00000000       0x30 main.o
                                  0x31 (size before relaxing)
+ .comment       0x00000030       0x31 uart.o
 
 .note.gnu.avr.deviceinfo
                 0x00000000       0x40
@@ -405,42 +410,51 @@ END GROUP
 .debug_sfnames
  *(.debug_sfnames)
 
-.debug_aranges  0x00000000       0x40
+.debug_aranges  0x00000000       0x58
  *(.debug_aranges)
  .debug_aranges
-                0x00000000       0x40 main.o
+                0x00000000       0x28 main.o
+ .debug_aranges
+                0x00000028       0x30 uart.o
 
 .debug_pubnames
  *(.debug_pubnames)
 
-.debug_info     0x00000000      0x7e8
+.debug_info     0x00000000      0x85c
  *(.debug_info .gnu.linkonce.wi.*)
  .debug_info    0x00000000      0x5f4 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.7.374/gcc/dev/atmega328p/avr5/crtatmega328p.o
- .debug_info    0x000005f4      0x1f4 main.o
+ .debug_info    0x000005f4      0x148 main.o
+ .debug_info    0x0000073c      0x120 uart.o
 
-.debug_abbrev   0x00000000      0x69a
+.debug_abbrev   0x00000000      0x6ef
  *(.debug_abbrev)
  .debug_abbrev  0x00000000      0x5a2 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.7.374/gcc/dev/atmega328p/avr5/crtatmega328p.o
- .debug_abbrev  0x000005a2       0xf8 main.o
+ .debug_abbrev  0x000005a2       0xc4 main.o
+ .debug_abbrev  0x00000666       0x89 uart.o
 
-.debug_line     0x00000000      0x32f
+.debug_line     0x00000000      0x3b8
  *(.debug_line .debug_line.* .debug_line_end)
  .debug_line    0x00000000      0x134 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.7.374/gcc/dev/atmega328p/avr5/crtatmega328p.o
- .debug_line    0x00000134      0x1fb main.o
+ .debug_line    0x00000134      0x159 main.o
+ .debug_line    0x0000028d      0x12b uart.o
 
-.debug_frame    0x00000000       0xb8
+.debug_frame    0x00000000       0xcc
  *(.debug_frame)
- .debug_frame   0x00000000       0xb8 main.o
+ .debug_frame   0x00000000       0x58 main.o
+ .debug_frame   0x00000058       0x74 uart.o
 
-.debug_str      0x00000000      0x3ea
+.debug_str      0x00000000      0x3f4
  *(.debug_str)
  .debug_str     0x00000000      0x208 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.7.374/gcc/dev/atmega328p/avr5/crtatmega328p.o
- .debug_str     0x00000208      0x1e2 main.o
-                                0x222 (size before relaxing)
+ .debug_str     0x00000208      0x18c main.o
+                                0x1c0 (size before relaxing)
+ .debug_str     0x00000394       0x60 uart.o
+                                0x1dc (size before relaxing)
 
 .debug_loc      0x00000000      0x168
  *(.debug_loc)
- .debug_loc     0x00000000      0x168 main.o
+ .debug_loc     0x00000000       0x90 main.o
+ .debug_loc     0x00000090       0xd8 uart.o
 
 .debug_macinfo
  *(.debug_macinfo)
@@ -460,9 +474,10 @@ END GROUP
 .debug_pubtypes
  *(.debug_pubtypes)
 
-.debug_ranges   0x00000000       0x30
+.debug_ranges   0x00000000       0x38
  *(.debug_ranges)
- .debug_ranges  0x00000000       0x30 main.o
+ .debug_ranges  0x00000000       0x18 main.o
+ .debug_ranges  0x00000018       0x20 uart.o
 
 .debug_macro
  *(.debug_macro)
