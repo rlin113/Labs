@@ -14,18 +14,20 @@
 
 int main(void)
 {
-	DDRB = 0xFF;
+	DDRB |= (1<<5);
+	DDRB &= ~(1<<7);
 	DDRC = 0x00;
 	DDRD = 0x00;
 	
     /* Replace with your application code */
     while (1) 
     {
+		if ((PINB & (1<<7)) == 0) {
 		PORTB |= (1<<5); 
-		_delay_ms(DELAY_TIME);
-		 
-		 PORTB &= ~(1<<5);
-		 _delay_ms(DELAY_TIME);
+	} 
+	else {
+		 PORTB &= ~(1 << 5);
+	}
 
     }
 }
