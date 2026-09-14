@@ -30,3 +30,4 @@ uint16_t adc_read(uint8_t chan) {
 uint32_t adc_convert_mv(uint16_t value) {
 	return (uint32_t)value * 5000 / 1024;
 }
+
