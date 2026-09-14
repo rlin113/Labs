@@ -18,19 +18,35 @@ static FILE usart_stdout = FDEV_SETUP_STREAM(uart_printf, NULL, _FDEV_SETUP_WRIT
 int main(void){
 	
 	stdout = &usart_stdout;
-	uint16_t adc_value; 
-	uint32_t voltage_value_mv; 
+
 	
+	uint16_t adc0_values[40];
+	uint16_t adc1_values[40];
+
 	uart_init(9600);
 	adc_init();
+	
+	uint8_t i;
+	
+	for (i = 0; i < 40; i++) {
+		adc0_values[i] = adc_read(0);
+		_delay_ms(1);
 		
-	while(1){
+		adc1_values[i] = adc_read(1);
+		_delay_ms(1);
 		
-		 adc_value = adc_read(2);
-		 voltage_value_mv = adc_convert_mv(adc_value);	
-		printf("Voltage: %d mV\n\r", (uint16_t)voltage_value_mv); 
-
-	_delay_ms(1);
+	}
+	
+	printf("ADC0,ADC1\r\n");
+	
+		for (i = 0; i < 40; i++)
+		{
+		 printf( "%u,%u\r\n", adc0_values[i], adc1_values[i]);
 		}
+	
+			
+
+	
+	while(1){}
 }
 
