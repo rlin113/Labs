@@ -21,10 +21,10 @@ DDRD = 0x00;
     while (1)
     {
 		PORTB |= (1<<5);
-		_delay_ms (37.5);
+		_delay_ms (375);
 		
 		PORTB &= ~(1<<5);
-		_delay_ms (12.5);
+		_delay_ms (125);
     }
 }
 
