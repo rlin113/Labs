@@ -5,7 +5,6 @@
  * Author : GGPC
  */ 
 
-main.c
 #define F_CPU 2000000UL
 
 #include "timer0.h"
@@ -17,6 +16,7 @@ main.c
 
 int main(void){
 	//TODO: set direction of LED port to OUTPUT
+	DDRB = 0xFF;
 	
 	timer0_init();
 	

@@ -14,7 +14,7 @@
 void timer0_init(){
 	//TODO: initialise and configure timer0 to count to 10ms
 	TCCR0A = 0x02; 
-	TCCR0B = 0x00; 
+	TCCR0B = 0x04; 
 	OCR0A = 77;
 	TCNT0 = 0; 
 }
