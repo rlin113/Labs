@@ -11,16 +11,6 @@
 #include <avr/interrupt.h>
 #include <stdint.h>
 
-static volatile uint16_t counter = 0;
-
-ISR(TIMER0_COMPA_vect) {
-	counter++; 
-	
-	if (counter >= 10) {
-		led_toggle();
-		counter = 0;
-	}
-}
 
 void timer0_init() {
 
@@ -28,12 +18,9 @@ void timer0_init() {
 //compare value, compare flag is automatically cleared
 //TODO: initialise and configure timer0 to interrupt every 10ms
 
-	TCCR0A = 0x02; 
-	TCCR0B = 0x04; 
-	OCR0A = 77;
+	TCCR0A = 0x00; 
+	TCCR0B = 0x00; 
 	TCNT0 = 0; 
-	TIMSK0 = 0x02; 
-}
 
 uint8_t timer0_check_clear_compare(){
 	
@@ -47,4 +34,5 @@ uint8_t timer0_check_clear_compare(){
 		return 1;
 	}
 	return 0;
+}
 }
