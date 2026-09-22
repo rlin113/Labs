@@ -11,12 +11,22 @@
 #include <avr/interrupt.h>
 #include <stdint.h>
 
-void timer0_init(){
-	//TODO: initialise and configure timer0 to count to 10ms
+
+ISR(TIMER0_COMPA_vect) {
+	led_toggle();
+}
+
+void timer0_init() {
+
+//This ISR function is called when timer0 reaches
+//compare value, compare flag is automatically cleared
+//TODO: initialise and configure timer0 to interrupt every 10ms
+
 	TCCR0A = 0x02; 
 	TCCR0B = 0x04; 
 	OCR0A = 77;
 	TCNT0 = 0; 
+	TIMSK0 = 0x02; 
 }
 
 uint8_t timer0_check_clear_compare(){

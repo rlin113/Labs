@@ -14,15 +14,15 @@
 #include <avr/io.h>
 #include <avr/interrupt.h>
 
-int main(void){
-	//TODO: set direction of LED port to OUTPUT
-	DDRB = 0xFF;
+
+//This special function call enables the use of interrupts
 	
-	timer0_init();
-	
-	while(1){
-		if(timer0_check_clear_compare()) {
-			led_toggle();
-		}
+	int main(void)
+	{
+		//TODO: set direction of LED port to OUTPUT
+		timer0_init();
+			DDRB = 0xFF;
+
+		sei();
+		while (1) { }
 	}
-}
