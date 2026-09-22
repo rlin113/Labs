@@ -17,6 +17,7 @@
 
 //This special function call enables the use of interrupts
 	
+
 	int main(void)
 	{
 		//TODO: set direction of LED port to OUTPUT
@@ -24,5 +25,6 @@
 			DDRB = 0xFF;
 
 		sei();
-		while (1) { }
+		while (1) {
+	}
 	}

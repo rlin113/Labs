@@ -11,9 +11,15 @@
 #include <avr/interrupt.h>
 #include <stdint.h>
 
+static volatile uint16_t counter = 0;
 
 ISR(TIMER0_COMPA_vect) {
-	led_toggle();
+	counter++; 
+	
+	if (counter >= 10) {
+		led_toggle();
+		counter = 0;
+	}
 }
 
 void timer0_init() {
