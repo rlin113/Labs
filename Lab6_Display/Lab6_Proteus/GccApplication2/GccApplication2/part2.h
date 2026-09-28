@@ -5,12 +5,12 @@
  *  Author: GGPC
  */ 
 
-#include <avr/io.h>
+// #include <avr/io.h>
 
-#ifndef PART2_H_
-#define PART2_H_
+// #ifndef PART2_H_
+// #define PART2_H_
 
-void init_display();
-void send_next_character_to_display(uint8_t pattern);  
+// void init_display();
+// void /*send_next_character_to_display*/(uint8_t pattern);  
 
-#endif /* PART2_H_ */
+/*#endif / * PART2_H_ * /*/

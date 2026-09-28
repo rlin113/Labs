@@ -6,33 +6,32 @@
  */ 
 
 #include <avr/io.h>
-#include "part2.h"
+#include "display.h"
+#include "timer0.h"
+#include <util/delay.h>
+#include <avr/interrupt.h>
+#include <stdint.h>
 
-// Digit values from 0 - 9:
-uint8_t segments[10] =
-{
-	0x3F,
-	0x06,
-	0x5B,
-	0x4F,
-	0x66,
-	0x6D,
-	0x7D,
-	0x87,
-	0x7F,
-	0x6F
-};
+volatile uint16_t counter = 0; 
 
+ISR(TIMER0_COMPA_vect) {
+	send_next_character_to_display(); 
+}
 int main(void)
 {
-	
-	init_display(); 
-	uint8_t pattern = segments[7]; 
-	
+	init_display();
+	timer0_init();
+	sei();
 	
     while (1) 
     {
-		send_next_character_to_display(pattern);
+		seperate_and_load_characters(counter, 0);
+		_delay_ms(400);
+		counter++;
+		
+		if (counter > 9999) {
+			counter = 0;
+		}
 		
 }
 }

@@ -153,6 +153,12 @@
     </ToolchainSettings>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="display.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="display.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="main.c">
       <SubType>compile</SubType>
     </Compile>
@@ -160,6 +166,12 @@
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="part2.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="timer0.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="timer0.h">
       <SubType>compile</SubType>
     </Compile>
   </ItemGroup>
