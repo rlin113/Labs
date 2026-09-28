@@ -102,8 +102,7 @@ counter++;
 			if (counter > 99) {
 				counter = 0;
 			}
-		
-}
+	     }
 	}
 	
 
